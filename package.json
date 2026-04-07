@@ -1,0 +1,17 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+    "dependencies": {
+    "dotenv": "^17.3.1",
+    "mqtt": "1.14.1",
+    "protobufjs": "^7.1.2"
+  }
+}

@@ -1,0 +1,105 @@
+Adım-1
+
+F_XU030 kontratı üzerinden şu bilgiyi elde et.
+
+"initialMargin":17515.61
+"last":
+
+
+Adım-2 
+
+Bu bilgiye göre meksa yatırıma "kontrat al" fonksiyonuna git.
+
+
+Kontrat Alma Logic Flow
+
+  Substep-1
+
+  Önce ana para belirlemesi yap.
+
+  Substep-2
+
+  Eğer anapara miktarı >= "initialMargin":17515.61 * 1.5 ise 1 adet kontrat al;
+  Eğer anapara miktarı >= "initialMargin":17515.61 * 3 ise 2 adet kontrat al;
+
+  Yani::::  Kontrat_Sayısı_ = (Anapara / "initialMargin") / 1.5 = en_yakıN_tam_sayı_yuvarla 
+
+  Substep-3
+
+  Meksa API ile meksadan kontrat al.
+
+
+
+Adım-3 
+
+Eğer mevcut kontrat var mı diye kontrol et, varsa yeni kontrat alma!
+
+
+Adım-4 
+
+XU100 için verileri al.
+
+
+Adım-5 
+
+XU100.dayClose için son 5 günün aritmetik ortalamasını al.
+
+--> ortalama hesaplayacak fonksiyon yaz
+
+
+Adım-6
+
+F_XU030.dayClose son 5 günün aritmetik ortalamasını al.
+
+--> ortalama alacak fonskyion yaz.
+
+Adım-7
+
+Long Emir İletme
+
+If XU100.last > XU100_day_close_ortalama ve F_XU030.last > F_XU030_day_close_ortalama:
+    IsShort == True
+
+    createMarketShortTPLSOrder(){
+        set IsShort = false
+    }
+
+    createLimitLongOrder(Kontrat_Sayısı_, limit_price) // bu fonksyionları yaz.
+    set IsLong = True
+
+If XU100.last < XU100_day_close_ortalama ve F_XU030.last < F_XU030_day_close_ortalama 
+    If IsLong == True
+        sellMarketLongOrder(Kontrat_Sayısı_, limit_price){
+            set IsLong = false
+        }
+        createLimitShortOrder(){
+            set IsShort = True
+        }
+
+    If Islong =! True
+
+        createLimitShortOrder(){
+            set IsShort = True
+        }
+
+
+Eğer XU100.last < XU100_day_close_ortalama ve F_XU030.last < F_XU030_day_close_ortalama
+If IsShort == True
+
+
+
+
+
+
+
+
+
+
+
+
+XU100 İçin;
+
+"last":12698.19,
+"dayClose":12727.06
+
+verilerini al.
